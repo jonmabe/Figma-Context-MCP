@@ -46,8 +46,6 @@ release:
     - if: $CI_COMMIT_TAG
   script:
     - echo "Creating release for version ${CI_COMMIT_TAG}"
-    - PKG_FILE=$(ls figma-developer-mcp-*.tgz)
-    - echo "Package file: $PKG_FILE"
   release:
     name: 'Figma MCP with OAuth Support ${CI_COMMIT_TAG}'
     description: 'This release adds OAuth token support using the Authorization Bearer method, while maintaining compatibility with Personal Access Tokens.'
@@ -55,5 +53,5 @@ release:
     assets:
       links:
         - name: 'Pre-built package'
-          url: '${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/raw/${PKG_FILE}?job=build-release'
+          url: '${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/raw/figma-developer-mcp-0.2.1.tgz?job=build-release'
           link_type: 'package' 
