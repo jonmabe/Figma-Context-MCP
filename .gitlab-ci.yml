@@ -36,9 +36,11 @@ build-release:
     - pnpm install
     - pnpm build
     - pnpm pack
+    - mkdir -p release
+    - cp figma-developer-mcp-*.tgz release/figma-mcp.tgz
   artifacts:
     paths:
-      - figma-developer-mcp-*.tgz
+      - release/figma-mcp.tgz
     expire_in: never
 
 release:
@@ -49,11 +51,11 @@ release:
   script:
     - echo "Creating release for version ${CI_COMMIT_TAG}"
   release:
-    name: 'Figma MCP with OAuth Support ${CI_COMMIT_TAG}'
-    description: 'This release adds OAuth token support using the Authorization Bearer method, while maintaining compatibility with Personal Access Tokens.'
+    name: 'Release $CI_COMMIT_TAG'
+    description: 'Release $CI_COMMIT_TAG of the Figma MCP Server'
     tag_name: $CI_COMMIT_TAG
     assets:
       links:
-        - name: 'Pre-built package'
-          url: '${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/raw/figma-developer-mcp-0.2.1.tgz?job=build-release'
+        - name: 'figma-mcp.tgz'
+          url: '${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/raw/release/figma-mcp.tgz?job=build-release'
           link_type: 'package' 
